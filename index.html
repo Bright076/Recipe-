@@ -6,12 +6,18 @@
   <meta name="keywords" content="food recipes, snacks recipes, homemade meals, African recipes, easy cooking, Cooking Recipes, how to cook, how to make good dishes">
 </head>
   <title>HOW TO COOK OR MAKE DISHES.</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="img">
+        <img id="cook" src="./20250911_223302.png"  alt="logo"/>
+      </div>
+<div class="head">
 <h2>Welcome to our website.</h2>
 <h2>How can we help you in your recipes.</h2>
+</div>
+  <div class="all">
 <h1>FOODS</h1>
+<div class="food">
 <a href="food1.html"><button id="btn1"></button></a>
 <h3>FRIED RICE AND CHICKEN </h3>
 <a href="food2.html"><button id="btn2"></button></a>
@@ -41,13 +47,61 @@
 <h3>TOAST BREAD</h3>
 <a href="snacks7.html"><button id="btn14"></button></a>
 <h3>ICE CREAM </h3>
+<a href="snacks8.html"><button id="btn15"></button></a>
+<h3>Chin Chin</h3>
+</div>
 <style>
   *{
     background-color: #04093E;
     color: white;
+    flex-wrap: nowrap;
+  }
+  .all{
+    position: relative;
+    display: flex;
+    margin-top: 0;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .img{
+    display: flex;
+    justify-content: center;
+  
+    position: relative;
+        z-index: 1;
+        background: transparent;
+        padding: 0;
+        height:160px;
+       
+  }
+
+  .img img{
+        width:350px;
+        left: 0;
+        background: transparent;
+        height: 330px;
+  }
+
+
+  .head{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 1px;
+
+  }
+  .food{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
   }
   h1{
-    font-family: serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 40px;
     text-align: center;
     background: red;
@@ -58,7 +112,7 @@
     text-align: center;
   }
   h3{
-    font-family:Times New Roman;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background: red;
     padding-top: 10px;
     margin-top: 0px;
@@ -68,16 +122,20 @@
     border-radius: 40px;
   }
   button{
-    padding: 60px;
     width: 360px;
     height: 250px;
-    margin: 10px 0 5px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
     border-radius: 40px;
     border-color: red;
     
   }
   #btn1{
     background-image: url('high-angle-view-food-plate_1048944-17463029.jpg');
+
   }
   #btn2{
     background-image: url('roasted-chicken-legs-with-south-indian-long-grain-tomato-rice-cooked-with-sauteed-tomatoes-onion-red-chili-powder-cinnamon-t.jpg');
@@ -117,6 +175,10 @@
   }
   #btn14{
     background-image: url('delicious-ice-cream-with-topping_23-2150735486.jpg');
+  }
+  
+  #btn15{
+    background-image:url('fried-dushbara-served-with-sauce.jpg')
   }
 </style>
 </body>
