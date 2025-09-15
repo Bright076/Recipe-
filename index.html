@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,40 +49,42 @@
 </div>
   <h1>SNACKS AND BAKERIES </h1>
   <div class="snack">
-  <div class="snaks1">
+  <div class="snack1">
       <a href="snacks1.html"><button id="btn8"></button></a>
       <h3>FRUIT SALAD </h3>
   </div>
-  <div class="snaks2">
+  <div class="snack2">
       <a href="snacks2.html"><button id="btn9"></button></a>
       <h3>MEAT PIE </h3>
   </div>
-  <div class="snaks3">
+  <div class="snack3">
       <a href="snacks3.html"><button id="btn10"></button></a>
       <h3>PIZZA </h3>
   </div>
-  <div class="snaks">
+  <div class="snack4">
       <a href="snacks4.html"><button id="btn11"></button></a>
       <h3>CAKE</h3>
   </div>
-  <div class="snaks">
+  <div class="snack5">
       <a href="snacks5.html"><button id="btn12"></button></a>
       <h3>BURGER</h3>
   </div>
-  <div class="snaks">
+  <div class="snack6">
       <a href="snacks6.html"><button id="btn13"></button></a>
       <h3>TOAST BREAD</h3>
   </div>
-  <div class="snaks">
+  <div class="snack7">
       <a href="snacks7.html"><button id="btn14"></button></a>
       <h3>ICE CREAM </h3>
   </div>
-  <div class="snaks">
+  <div class="snack8">
       <a href="snacks8.html"><button id="btn15"></button></a>
       <h3>Chin Chin</h3>
   </div>
 </div>
 </div>
+</body>
+</html>
 <style>
   *{
     background-color: #04093E;
@@ -99,7 +101,27 @@
     gap: 5px;
   }
 
-  @media(max-width:820px){
+  .food{
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+
+  .snack{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+
+  @media(max-width: 1025px){
     .food{
       display: grid;
       grid-template-columns: repeat(2,1fr);
@@ -112,18 +134,36 @@
     }
   }
 
-  @media(max-width:1025px){
+  @media(max-width: 720px){
     .food{
       display: grid;
-      grid-template-columns: repeat(2,1fr);
+      grid-template-columns:1fr;
       gap: 10px;
     }
     .snack{
       display: grid;
-      grid-template-columns: repeat(2,1fr);
+      grid-template-columns:1fr;
       gap: 10px;
     }
+    .food h3{
+      width: 300px;
+      align-items: center;
+      position: relative;
+    }
+    .food button{
+      width: 300px;
+    }
+    .snack h3{
+      width: 300px;
+      align-items: center;
+      position: relative;
+    }
+    .snack button{
+      width: 300px;
+    }
   }
+
+
   .img{
     display: flex;
     justify-content: center;
@@ -151,25 +191,6 @@
     gap: 1px;
 
   }
-  .food{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    gap: 10px;
-  }
-
-
-  .snack{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    gap: 10px;
-  }
-
 
   h1{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -252,5 +273,4 @@
     background-image:url('fried-dushbara-served-with-sauce.jpg')
   }
 </style>
-</body>
-</html>
+
