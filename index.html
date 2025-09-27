@@ -4,14 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="food recipes, snacks recipes, homemade meals, African recipes, easy cooking, Cooking Recipes, how to cook, how to make good dishes">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss"> </style>
 </head>
   <title>HOW TO COOK OR MAKE DISHES.</title>
 </head>
 <body>
-    <div class="img">
+  <div class="update bg-sky-500/75 ">
+    <h6 class="font-sans bg-red-500 p-2 pd-50px inline-block whitespace-nowrap animate-[move-right_50s__infinite]">A Female Nigerian Chef who broke the world record for cooking the largest jellof rice. She is by name "Hilda Baci" Go now and check it out.</h6>
+  </div>
+    <div class="img animate-[bounce-with-pause_3s_ease-in-out_infinite]">
         <img id="cook" src="./20250911_223302.png"  alt="logo"/>
       </div>
-<div class="head">
+<div class="head leading-10">
 <h2>Welcome to our website.</h2>
 <h2>How can we help you in your recipes.</h2>
 </div>
@@ -81,6 +86,10 @@
       <a href="snacks8.html"><button id="btn15"></button></a>
       <h3>Chin Chin</h3>
   </div>
+  <div class="snack9">
+      <a href="snacks9.html"><button id="btn16"></button></a>
+      <h3>Sharwarma</h3>
+  </div>
 </div>
 </div>
 </body>
@@ -90,6 +99,19 @@
     background-color: #04093E;
     color: white;
     flex-wrap: nowrap;
+
+  }
+  @keyframes move-right{
+    0%{transform: translatex(-100%);}
+    100%{transform: translateX(100%)}
+
+  }
+
+  @keyframes bounce-with-pause{
+    0%, 20% {transform: translateY(0); }
+    40% {transform: translateY(-10px); }
+    60% {transform: translateY(0); }
+    100% {transform: translateY(0); }
   }
   .all{
     position: relative;
@@ -108,6 +130,7 @@
     justify-items: center;
     align-items: center;
     gap: 10px;
+    padding-top: 20px;
   }
 
 
@@ -139,6 +162,7 @@
       display: grid;
       grid-template-columns:1fr;
       gap: 10px;
+      padding-top: 15px;
     }
     .snack{
       display: grid;
@@ -227,50 +251,101 @@
   }
   #btn1{
     background-image: url('high-angle-view-food-plate_1048944-17463029.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
   }
   #btn2{
     background-image: url('roasted-chicken-legs-with-south-indian-long-grain-tomato-rice-cooked-with-sauteed-tomatoes-onion-red-chili-powder-cinnamon-t.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn3{
     background-image: url('instant-noodles-bowl-place-wooden-table_41722-540.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn4{
     background-image: url('black-eyed-beans-curry-indian-cuisine_114579-82633.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn5{
     background-image: url('traditional-tajine-dishes-couscous-fresh-salad-rustic-wooden-table-tagine-lamb-meat-pumpkin-top-view-flat-lay_2829-6116.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn6{
     background-image: url('pasta-spaghetti-with-shrimps-sauce_1220-5069.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn7{
     background-image: url('high-angle-sweet-potatoes-with-herbs_23-2148619092.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn8{
     background-image: url('fruit-salad-strawberry-kiwi-black-currant-yogurt_496587-43.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn9{
     background-image: url('jerky-pastries-ceramic-plate-white-surface_70216-3326.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn10{
     background-image: url('side-view-pizza-with-slices-bell-pepper-pizza-slices-flour-board-cookware_176474-3185.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn11{
     background-image: url('white-cake-poured-with-chocolate-decorated-with-oreo-tofifi-cookies_140725-9934.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn12{
     background-image: url('delicious-burger-with-fresh-ingredients_23-2150857908.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn13{
     background-image: url('pepperoni-toast-with-cheese-served-win-bamboo-plate_140725-8340.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   #btn14{
     background-image: url('delicious-ice-cream-with-topping_23-2150735486.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   #btn15{
-    background-image:url('fried-dushbara-served-with-sauce.jpg')
+    background-image:url('fried-dushbara-served-with-sauce.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  #btn16{
+    background-image: url('side-view-chicken-roll-grilled-chicken-lettuce-cucumber-tomato-mayo-pita.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 </style>
 
