@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cooking Recipe Chatbot</title>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">👩‍🍳 Cooking Recipe Assistant</div>
+
+    <div class="chat-body" id="chatBody">
+      <div class="chat-message bot-message">
+        👋 Hi there! I’m your cooking assistant. What would you like to cook today?
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type your question...">
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+</body>
+</html>
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color:  #04093E;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .chat-container {
+    width: 400px;
+    height: 550px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .chat-header {
+    background-color:red;
+    color: white;
+    padding: 16px;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+  .chat-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color:  #04093E;
+    display: flex;
+    border: 2px solid black;
+    flex-direction: column;
+  }
+
+  .chat-message {
+    max-width: 75%;
+    padding: 10px 14px;
+    margin: 6px 0;
+    border-radius: 10px;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+
+  .user-message {
+    align-self: flex-end;
+    background-color: #f97316;
+    color: white;
+    border-bottom-right-radius: 0;
+  }
+
+  .bot-message {
+    align-self: flex-start;
+    background-color: #fde68a;
+    color: #3f3f46;
+    border-bottom-left-radius: 0;
+  }
+
+  .chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: rgb(177, 169, 169);
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    font-size: 0.95em;
+  }
+
+  .chat-input button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 18px;
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .chat-input button:hover {
+    background-color: #ea580c;
+  }
+
+  .chat-body::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chat-body::-webkit-scrollbar-thumb {
+    background-color:white;
+    border-radius: 10px;
+  }
+
+  /* ✅ Style for the Next button inside chat */
+  .next-btn {
+    background-color: #f97316;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-top: 6px;
+    font-size: 0.9em;
+  }
+
+  .next-btn:hover {
+    background-color: #ea580c;
+  }
+</style>
+
+  <!-- ✅ JavaScript Section -->
+  <script>
+    const chatBody = document.getElementById("chatBody");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    // 🍴 Step-by-step recipes (each with multiple steps)
+    const recipeSteps = {
+      food1: [
+      "So first of all, we will start with listing the ingridients which are;<br/> For the chicken: <li>1 pound boneless</li> <li>2 tablespoons of vegetable oil</li> <li>1 teaspoon of soy sauce</li> <li>1 teaspoon of oyster sauce (optional)</li> <li>1 teaspoon of garlic powder</li> <li>Salt and pepper to taste</li>  And for the fried rice: <li> 2 cups(according to your choice) of uncooked rice</li> <li>1 tablespoon of vegetable oil</li> <li>1 small onion, diced</li> <li>2 cloves of garlic, minced</li> <li>1 cup of mixed vegetables (e.g., peas, carrots, corn)</li> <li>2 eggs, beaten</li> <li>1 teaspoon of soy sauce</li> <li>Salt and pepper for taste</li>. So when you get the ingridients just click on next then we continue.",
+      "Lets first of all cook the chicken",
+      "Ok so, heat an oil in a pan or pot over medium-high heat",
+      "After heating for some miniutes you can now add the chicken and cook until browned and cooked through. Remember this is for cooking the chicken.",
+      "Then you can now add some of your ingridients like; soy sauce, oyster sauce (if using), and garlic powder and season it with salt and pepper to taste.",
+      "So that is it for the chicken. So if done click next lets continue.",
+      "So to Prepare the fried rice here are the things to do",
+      "Per-boil your rice then click next let's continue",
+      "Heat the oil in a large skillet or wok over medium-high heat and add your diced onion and cook until translucent(partially cooked).",
+      "Now add the mixed vegetables and cook until tender.",
+      "After that you add the per-boiled rice to the skillet(frying pan) or the pot or a wok and stir-fry for about 5 minutes, breaking up any clumps.",
+      "Now push the rice mixture to one side of the pan or pot and add a little more oil if needed,",
+      "then after that you pour in the beaten eggs and scramble it until cooked through, then mix with the rice mixture.",
+      "Now add the cooked chicken to the fried rice mixture and stir-fry for another one minute and also you can add soy sauce to taste.",
+      "Now your fried rice and chicken is now ready to serve. So you can now transfer the fried rice and chicken to a serving platter.",
+      ],
+      food2: [
+        "So we are starting with the ingridients which are; ",
+        "<b>For the chicken:</b> <li>1 pound boneless, skinless chicken breast or thighs, cut into bite-sized pieces</li> <li>2 tablespoons of vegetable oil</li> <li>1 teaspoon of curry powder</li> <li>1 teaspoon of paprika</li> <li>Salt and pepper to taste</li>",
+        " <b>For the fried rice:</b> <li> 1 cup (according to your choice) of uncooked rice</li> <li>2 cups water</li>  <li>2 tablespoon of vegetable oil</li> <li>1 large onion, diced/chopped</li> <li>2 cloves of garlic, minced</li> <li>1 large tomato, diced</li> <li>1 teaspoon grated ginger</li> <li>1 teaspoon curry powder</li><li>1 teaspoon paprika</li><li>Salt and pepper to taste</li><li>2-3 Scotch bonnet peppers or habanero peppers (optional, for some heat)</li>. When you get the ingridients just click on next then we continue.",
+        "Now lets go for the cooking, So now Mix chicken pieces with curry powder, paprika, salt, and pepper and leave it to marinate(soak) for at least 30 minutes. I will be waiting, when done you can click next so we can continue cooking",
+        "Hope you are ready, So now to cook the chicken because what we did is to marinate the chickenp, Now, heat oil in a pan over medium heat and add the marinated chicken then cook until browned and cooked through and then set the chicken aside.",
+        "Now for the jollof rice because our chicken is set. Now what you will have to do now is to per-boil your rice after that click next let's continue",
+        "Now lets continue, So heat another oil in a large pot over medium heat and add your chopped onion and cook until translucent.",
+        "Add your minced garlic and grated ginger and cook for 1 minute then click next let's continue",
+        "Now what you have to do now is to add your diced tomato, curry powder, paprika, salt, and pepper then cook for 5 minutes, stirring occasionally",
+        "After that what you have to do now is to add your per-boiled rice and water to the pot stir well to combine then you can now add the cooked chicken to the pot and stir gently ",
+        "Now bring the mixture to a boil, then reduce heat to low, cover, and simmer for 20-25 minutes or until the rice is cooked and fluffy.",
+        "Now your Jellof Rice and chicken is ready to be served and serve hot, garnished with chopped fresh herbs or scallions(optional). </br> Tips</br> Use long-grain rice for the best results, adjust the amount of Scotch bonnet peppers or habanero peppers to your desired level of spiciness and you can also add other ingredients like bell peppers, carrots, or peas to the jollof rice.",
+      ],
+      food3:[
+        "So the required ingridients for cooking noodles are as follows; <li><b>Soy sauce:</b> which adds a savory, umami flavor.</li><li><b>Tomato sauce:</b> This is a classic pairing for spaghetti and other long noodles.</li><li><b> Curry sauce:</b>which adds a spicy, aromatic flavor.</li><li><b> Herbs and spices:</b>This ingridients experiment with different combinations to find your favorite flavors.</br> After that you can click next to continue </li>",
+        "So first of all you will need to boil water. So fill a large pot with water and bring it to a boil ",
+        "After that  add the noodles to the boiling water .",
+        "Then Cook according to package instructions, Check the package for specific cooking times.Typically, noodles take 3-10 minutes to cook.",
+        "Then after cooking, drain the noodles in a colander and serve with your favorite sauce or seasonings.",
+        "Your cooking is done you can now enjoy your noodles (for tips go to the site and click on indomine then scroll down to see it",
+      ],
+      food4:[
+      "So the required ingridients for cooking Jollof beans are as follows;<li>1(as you wish) cup dried Nigerian beans (e.g., brown beans or honey beans)<li>Water</li><li>Salt</li><li>Optional: onions, peppers, garlic, ginger, or other spices</li> </br> After that you can click next to continue",
+      "So now lets begin to cook; So first of all you will need to rinse the dried beans in water to remove any debris or impurities.",
+      "After that you Soak the beans in water for at least 8 hours or overnight(optional). This helps to reduce cooking time and makes the beans easier to digest.",
+      "Now you have to drain the soaked beans and rinse them with fresh water(if you soaked it else click next to continue)",
+      "So now is when the cooking will start. So Place the beans in a large pot with enough water to cover them. After that you  bring to a boil, then you reduce the heat to low and simmer for about 1-2 hours, or until the beans are tender",
+      "So now you will have to put the spices, Now add your salt and any desired spices (e.g., onions, peppers, garlic, ginger) to the beans during the last 30 minutes of cooking",
+      "So after that, Guees what(click next to continue)",
+      "You are done with the cooking. Serve the cooked beans hot, either on their own or with a side dish like rice, plantains, or yams.",
+      "Go to the main recipe page to view the tips",
+      ],
+      food5:[
+      "So the required ingridients for cooking porridge yam are as follows;<li>2-3 medium-sized yams, peeled and chopped<li>Water</li><li>Salt</li><li>Optional: onions, peppers, garlic, ginger, or other spices</li> </br> After that you can click next to continue",
+      "So now lets begin to cook; So first of all you will have to boil water in a large pot and then peel and chop/cut your yam.",
+      "After that you  add your chopped yam to the boiling water and  cook yam until tender, about 15-20 minutes.",
+      "Now you have to  use a masher or fork to mash the cooked yam",
+      "After that you add salt and any desired spices (e.g., pepper, onions, garlic) to taste.",
+      "Now, Simmer the porridge yam for an additional 5-10 minutes, stirring occasionally.",
+      "So after that, Guees what",
+      "You are done with the cooking.Now serve the Porridge yam",
+      "For your tips, Go to the main recipe page to view the tips",
+      ],
+      food6:[
+      "So the required ingridients for cooking your delicious spaghetti are as follows;<li>1 pound spaghetti<li>Water</li><li>Salt</li><li>Optional: onions, peppers, garlic, ginger, or other spices</li> </br> After that you can click next to continue",
+      "So now lets begin to cook; So first of all you will have to boil water in a pot and Add salt to the boiling water (about 1-2 tablespoons).",
+      "After that you carefully add the spaghetti to the boiling water..",
+      "Now you have to cook the spaghetti according to package instructions (usually 8-12 minutes) until al dente.",
+      "After cooking according to the package instructions you can now drain the spaghetti in a colander.",
+      "And after that, Guees what",
+      "You are done with the cooking.Now serve with your favorite sauce, such as tomato sauce, pesto, or carbonara.",
+      "For your tips, Go to the main recipe page to view the tips",
+      ],
+      snacks1:[
+      "So the required ingridients for making your Fruit salad are as follows;<li>Assorted fruits of your choice (e.g., pineapple, watermelon, banana, orange, mango, grapes, etc.)</li> <li>1 tablespoon of honey (optional)</li> <li> 1 tablespoon of lemon juice (optional)</li> <li>Ice cubes (optional)</li> <li>Liquid milk to look creamy </br> Note that the main ingridients used in making this recipe are the fruits and the milk while others are just optional(if you wish). After that you can click next lets continue",
+      "So now lets begin to make it; So first of all you will have Wash and peel the fruits, depending on their type and after that Cut the fruits into bite-sized pieces",
+      "So now you will have to get a large bowl, In the large bowl, combine all the fruit pieces.",
+      "If you want, you can drizzle with honey and lemon juice, and toss gently but you must add it some liquid milks to look creamy",
+      "And after that, Guees what",
+      "You are done .Now Serve chilled(must) and garnish it with fresh mint leaves or a sprinkle of sugar, if desired.",
+      "For your tips, Go to the main recipe page to view the tips and note that why this recipe takes time is because of the peeling and cutting of fruits",
+      ],
+      snacks2: [
+    "So lets start with the Ingredients:",
+    "<b>For the filling:</b><ul><li>1 pound ground beef</li><li>1 onion, diced</li><li>2 cloves garlic, minced</li><li>1 teaspoon curry powder</li><li>1 teaspoon thyme</li><li>Salt and pepper to taste</li><li>2 tablespoons vegetable oil</li></ul>",
+
+    "<b>For the pastry:</b><ul><li>2 cups all-purpose flour</li><li>1 teaspoon baking powder</li><li>1/2 teaspoon salt</li><li>1/2 cup cold butter, cubed</li><li>1/4 cup ice-cold water</li></ul>",
+
+    "So when you're ready with your ingredients, click **Next** and we'll start the cooking process!",
+    
+    "First, let's prepare the filling: Heat the oil in a pan and cook the ground beef, onion, and garlic until browned. Then, add curry powder, thyme, salt, and pepper. Cook for another few minutes.",
+    
+    "Next, let’s prepare the pastry: In a large bowl, mix the flour, baking powder, and salt. Add the cubed butter and use your hands or a pastry cutter to mix it until crumbly. Gradually add ice-cold water until the dough forms.",
+    
+    "Roll out the dough on a floured surface and use a cutter to make circles. Place a spoonful of the filling in the center of each circle.",
+    
+    "Fold the dough over the filling, press the edges to seal, and brush the top with egg wash for a golden finish.",
+    
+    "Now, it's time to bake: Place the pies on a baking sheet and bake for 25-30 minutes, or until they turn golden brown.",
+    "And there you go! Your delicious meat pies are ready to serve! Enjoy!",
+    "Tips:",
+    "<ul><li>Use high-quality ingredients for the best flavor.</li><li>Don’t overfill the pies to prevent leakage.</li><li>Try different fillings like chicken or vegetables for variety.</li></ul>",
+
+      ],
+      snacks3: [
+    "Now lets start with the Ingredients:",
+    "<b>For the dough:</b><ul><li>2 cups all-purpose flour</li><li>1 teaspoon yeast</li><li>1 teaspoon salt</li><li>1 tablespoon sugar</li><li>1 cup warm water</li><li>2 tablespoons vegetable oil</li></ul>",
+
+    "<b>For the sauce:</b><ul><li>2 cups crushed tomatoes</li><li>1 onion, finely chopped</li><li>2 cloves garlic, minced</li><li>1 teaspoon dried oregano</li><li>Salt and pepper to taste</li></ul>",
+
+    "<b>Toppings:</b><ul><li>Mozzarella cheese</li><li>Pepperoni, sausage, mushrooms, onions, bell peppers, etc.</li></ul>",
+
+    "So when you're ready with your ingredients, click **Next** and we'll start the cooking process!",
+
+    "First, let's make the dough: In a large bowl, mix the flour, yeast, salt, and sugar. Add the warm water and vegetable oil. Stir to combine, then knead the dough until smooth.",
+
+    "Next, let’s let the dough rise: Cover the dough with a clean kitchen towel and let it rise for 1-2 hours, or until doubled in size.",
+
+    "While the dough rises, prepare the sauce: In a saucepan, cook the chopped onion and minced garlic until softened. Add the crushed tomatoes, oregano, salt, and pepper. Stir to combine and simmer for 10-15 minutes.",
+
+    "Preheat the oven: Set your oven to 425°F (220°C).",
+
+    "Now, it’s time to assemble the pizza: Roll out the dough on a floured surface to your desired thickness. Place it on a pizza stone or baking sheet. Spread the sauce over the dough, then add your toppings like mozzarella, pepperoni, and vegetables.",
+
+    "Next, bake the pizza: Place the pizza in the oven and bake for 15-20 minutes or until the crust is golden and the cheese is melted and bubbly.",
+    "Now we are done. Enjoy your delicious pizza!",
+    "Tips:",
+    "<ul><li>Use quality ingredients for better flavor.</li><li>Experiment with unique toppings like suya chicken or plantain.</li><li>Consider using a pizza stone for a crispy crust.</li></ul>",
+
+    "Some popular pizza twists:",
+    "<ul><li>Add spicy pepper sauce for an extra kick.</li><li>Use plantain or yam crust for a twist.</li><li>Top with grilled chicken or beef suya.</li></ul>",
+
+  ],
+  snacks4: [
+    "So lets begin with the Ingredients(this is a vanila cake recipe):",
+    "<b>For the cake:</b><ul><li>2 1/4 cups all-purpose flour</li><li>1 1/2 cups granulated sugar</li><li>2 teaspoons baking powder</li><li>1 teaspoon salt</li><li>1/2 cup unsalted butter, softened</li><li>2 large eggs</li><li>2 teaspoons vanilla extract</li><li>1 cup whole milk, at room temperature</li></ul>",
+
+    "<b>For the frosting (optional):</b><ul><li>1 cup unsalted butter, softened</li><li>2 cups powdered sugar</li><li>1 teaspoon vanilla extract</li></ul>",
+
+    "So when you're ready with your ingredients, click Next and we'll start the cooking process!",
+
+    "First, preheat the oven: Preheat your oven to 350°F (175°C). Grease two 9-inch round cake pans and line the bottoms with parchment paper.",
+
+    "Next, mix the dry ingredients: In a medium bowl, whisk together the flour, sugar, baking powder, and salt.",
+
+    "Now, mix the wet ingredients: In a large bowl, whisk together the softened butter, eggs, vanilla extract, and milk.",
+
+    "Combine the wet and dry ingredients: Gradually add the dry ingredients to the wet ingredients and mix until just combined. Be careful not to overmix.",
+
+    "Divide the batter: Divide the batter evenly between the two prepared cake pans.",
+
+    "Bake the cake: Place the pans in the preheated oven and bake for 25-30 minutes or until a toothpick inserted into the center comes out clean.",
+
+    "Cool the cakes: Let the cakes cool in the pans for 5 minutes, then transfer them to a wire rack to cool completely.",
+
+    "Frost (optional): If desired, make the frosting by whipping together softened butter, powdered sugar, and vanilla extract. Frost the cooled cakes once they are completely cool.",
+    "Enjoy your delicious vanilla cake!",
+    "Tips:",
+    "<ul><li>Use room temperature ingredients for the best texture.</li><li>Don't overmix the batter to ensure a light, fluffy cake.</li><li>Let the cake cool completely before frosting and serving.</li></ul>",
+
+    "Variations:",
+    "<ul><li>Add cocoa powder for a chocolate cake.</li><li>Try adding nuts, fruit, or spices to the batter for extra flavor.</li><li>Experiment with different types of milk or flavorings in the frosting.</li></ul>",
+
+  ],
+  snacks5: [
+    "Now lets begin with the Ingredients:",
+    "<ul><li>500g ground beef (or alternative protein)</li><li>1 onion, finely chopped</li><li>2 cloves garlic, minced</li><li>1 tablespoon Worcestershire sauce</li><li>1 teaspoon paprika</li><li>Salt and pepper to taste</li><li>4 hamburger buns</li><li>Lettuce, tomato, cheese, pickles, and condiments (optional)</li></ul>",
+
+    "So when you're ready with your ingredients, click Next and we'll start the cooking process!",
+
+    "First, preheat the grill or grill pan to medium-high heat.",
+
+    "Next, mix the ground beef with the chopped onion, minced garlic, Worcestershire sauce, paprika, salt, and pepper in a bowl. Be careful not to overwork the meat mixture to avoid tough burgers.",
+
+    "Now, form the meat mixture into evenly sized patties, making sure they're slightly larger than the buns to account for shrinkage during cooking.",
+
+    "Grill or cook the patties: Place the patties on the preheated grill or grill pan. Grill for about 4-5 minutes on each side for medium doneness, or longer if you prefer your burgers more well-done.",
+
+    "Once the patties are cooked to your liking, it's time to assemble the burgers! Place the patties on the buns and add lettuce, tomato, cheese, pickles, and any other condiments you like.",
+    "Now we are done. Enjoy your delicious homemade burgers!",
+    "Tips:",
+    "<ul><li>Use fresh, high-quality ingredients for the best flavor.</li><li>Don't overwork the meat mixture to ensure the burgers stay juicy.</li><li>Experiment with unique toppings like avocado, fried eggs, or bacon for added flavor.</li></ul>",
+
+    "Some popular burger twists:",
+    "<ul><li>Add suya spice for a Nigerian-inspired flavor.</li><li>Try using plantain or yam patties for a twist.</li><li>Top with grilled vegetables or a fried egg for extra flair.</li></ul>",
+  ],
+  snacks6: [
+    "Let us start with the Ingredients:",
+    "<ul><li>2 cups all-purpose flour</li><li>1 teaspoon yeast</li><li>1 teaspoon salt</li><li>1 tablespoon sugar</li><li>1 cup warm water</li><li>2 tablespoons vegetable oil</li></ul>",
+
+    "So when you're ready with your ingredients, click Next and we'll start the cooking process!",
+
+    "First, mix the flour, yeast, salt, and sugar in a bowl.",
+
+    "Next, add the warm water and vegetable oil. Stir until the dough begins to form.",
+
+    "Now, knead the dough for about 10 minutes on a floured surface until it becomes smooth and elastic.",
+
+    "Let the dough rise: Place the dough in a lightly greased bowl, cover it, and let it rise for 1-2 hours until it doubles in size.",
+
+    "Preheat your oven to 350°F (180°C). While the oven heats up, shape the dough into a loaf and place it in a greased loaf pan.",
+
+    "Bake for 25-30 minutes or until the bread is golden brown on top. You can also tap the bottom of the loaf, and it should sound hollow.",
+    "After that guess what..",
+    "We are done with this recipe. Enjoy your freshly baked Nigerian toast bread!",
+    "Tips:",
+    "<ul><li>Use quality ingredients for the best texture and flavor.</li><li>Ensure the dough rises properly for a soft, fluffy loaf.</li><li>Adjust the oven temperature as needed for even baking.</li></ul>",
+
+    "You can also use a bread machine or toaster oven for convenience!",
+
+    "Some popular toast bread variations:",
+    "<ul><li>Add nuts or seeds to the dough for added texture and flavor.</li><li>Substitute with whole wheat flour for a healthier option.</li><li>Spread with local spreads like akara or bean paste for a tasty twist.</li></ul>",
+
+  ],
+  snacks7: [
+    "Lets start with the Ingredients:",
+    "<ul><li>2 cups heavy cream</li><li>1 cup whole milk</li><li>1/2 cup granulated sugar</li><li>1 tsp vanilla extract</li></ul>",
+
+    "So when you're ready with your ingredients, click on Next and we'll start the process!",
+
+    "First, combine the cream, milk, and sugar: In a medium saucepan, whisk together the heavy cream, whole milk, and granulated sugar. Heat the mixture over medium heat, stirring occasionally, until the sugar dissolves and the mixture is hot but not boiling.",
+
+    "Next, let it cool: Remove the saucepan from the heat and let it cool to room temperature. Cover the mixture and refrigerate it for at least 2 hours, or even overnight for best results.",
+
+    "Now, churn the ice cream: Pour the chilled mixture into an ice cream maker and churn it according to the manufacturer's instructions.",
+
+    "Once the ice cream is almost fully churned, add the vanilla extract and continue to churn until it’s fully incorporated.",
+
+    "Finally, freeze the ice cream: Transfer the churned ice cream to an airtight container and place it in the freezer to harden for at least 2 hours.",
+
+    "If you have no Ice Cream Maker dont panic because it is not a problem!",
+    "If you don't have an ice cream maker, freeze the mixture in a shallow metal pan or a 9x13-inch baking dish. Stir the mixture every 30 minutes until it's the desired consistency. This process can take about 2-3 hours.",
+    "Now we are done. Enjoy your delicious homemade ice cream!",
+    "Tips:",
+    "<ul><li>Use high-quality ingredients for the best flavor.</li><li>Experiment with different flavorings like cocoa powder, nuts, or fruit purees.</li><li>If you're using mix-ins like chocolate chips or nuts, fold them into the ice cream once it's almost fully churned.</li></ul>",
+
+    "Variations:",
+    "<ul><li><b>Chocolate ice cream:</b> Add cocoa powder or melted chocolate to the mixture.</li><li><b>Strawberry ice cream:</b> Add strawberry puree or jam to the mixture.</li><li><b>Mint chip ice cream:</b> Add peppermint extract and chocolate chips to the mixture.</li></ul>",
+
+  ],
+  snacks8: [
+    "Let us begin with the Ingredients:",
+    "<ul><li>2 cups all-purpose flour</li><li>1/2 cup sugar (adjust to taste)</li><li>1/2 teaspoon salt</li><li>1 teaspoon baking powder</li><li>1/2 teaspoon ground nutmeg (optional but adds nice flavor)</li><li>1/2 cup margarine or butter (softened)</li><li>2 large eggs</li><li>1/2 cup milk (or water, for dairy-free version)</li><li>Vegetable oil for frying</li></ul>",
+
+    "So when you're ready with your ingredients, click Next and we’ll begin the process!",
+
+    "In a large bowl, combine the flour, sugar, salt, baking powder, and nutmeg. Mix well.",
+
+    "Add the softened margarine or butter to the dry ingredients. Rub it into the flour mixture with your fingers until it resembles breadcrumbs.",
+
+    "Beat the eggs and add them to the mixture. Gradually add the milk and mix until a soft, non-sticky dough forms. If the dough is too sticky, add a little more flour. If it's too dry, add a little more milk.",
+
+    "Lightly flour a clean surface, then roll the dough out to about 1/4 inch thick. Use a knife or pizza cutter to cut it into small squares or strips.",
+
+    "Heat oil in a deep frying pan over medium heat. Test the temperature with a small piece of dough — it should rise and bubble gently.",
+
+    "Fry in batches to avoid overcrowding. Stir gently while frying to ensure even browning. Fry until golden brown and crispy (about 3–5 minutes per batch). Remove and drain on paper towels.",
+    "Now, You can enjoy your freshly baked Chin Chin!",
+    "Tips:",
+    "<ul><li>Let the dough rest for 5–10 minutes before cutting for easier handling.</li><li>You can add a teaspoon of vanilla extract to the wet mixture for extra flavor.</li><li>For a crunchier version, roll the dough thinner and fry a bit longer.</li></ul>",
+
+    "Storage:",
+    "<ul><li>Once cool, store chinchin in an airtight container.</li><li>It stays fresh for up to 2 weeks at room temperature.</li></ul>",
+
+  ],
+  snacks9: [
+    "So let us begin with the Ingredients:",
+
+    "<b>For the Chicken Marinade:</b><ul><li>500g boneless chicken thighs or breasts (thighs preferred)</li><li>3 tablespoons plain yogurt</li><li>3 tablespoons olive oil</li><li>1 tbsp vinegar or lemon juice</li><li>4 cloves garlic (minced)</li><li>1 tablespoon ground cumin</li><li>1 tablespoon ground paprika</li><li>1 tablespoon ground turmeric (optional for color)</li><li>½ tablespoon ground cinnamon</li><li>1 tablespoon ground coriander (optional)</li><li>Salt and pepper to taste</li></ul>",
+
+    "<b>For the Garlic Sauce (Toum-style):</b><ul><li>4 garlic cloves</li><li>½ tablespoon of salt</li><li>1 egg white or 1 tablespoon mayo (for easier emulsifying)</li><li>¾ cup neutral oil (sunflower, vegetable)</li><li>2 tablespoons lemon juice</li></ul>",
+
+    "<b>For the Wrap:</b><ul><li>Pita bread or flatbread</li><li>Cucumbers</li><li>Tomatoes</li><li>Pickles (especially turnip or cucumber)</li><li>Lettuce or shredded cabbage</li><li>Onions (optional, thinly sliced)</li><li>Chili sauce or tahini (optional)</li></ul>",
+
+    "When you're ready to start cooking, click on Next and we'll get going!",
+
+    "In a bowl, mix yogurt, oil, vinegar, spices, garlic, salt, and pepper. Add the chicken and coat well. Marinate for at least 2 hours (preferably overnight).",
+
+    "So now we have to cook the Chicken and in cooking the chicken we have many ways to cook it so you have to choose only one option",
+
+    "<u>Option 1: Oven/Roast</u><ul><li>Preheat the oven to 220°C (425°F).</li><li>Lay the chicken on a baking tray and roast for 25-30 minutes until golden and cooked through.</li><li>Optional: Broil for 2-3 minutes at the end for crispy edges.</li></ul>",
+
+    "<u>Option 2: Stovetop</u><ul><li>Heat a skillet or grill pan over medium-high heat.</li><li>Cook the chicken for 5-6 minutes per side, until nicely charred and cooked through.</li></ul>",
+
+    "<u>Option 3: Grill</u><ul><li>Skewer and grill the chicken for a smokier flavor.</li><li>Once cooked, slice thinly.</li></ul>",
+
+    "Now lets make the Garlic Sauce:",
+    "Blend garlic and salt until smooth. Add the egg white or mayo and slowly drizzle in oil while blending until thickened like mayo. Add lemon juice at the end and adjust to taste.",
+
+    "So now lets assemble the Shawarma Wrap:",
+    "Warm the pita or flatbread, then spread garlic sauce or tahini. Add the chicken slices, top with pickles, tomatoes, cucumbers, lettuce, etc. Roll it up like a wrap or serve open-style.",
+    "Finally we are done it was a little long process. Enjoy your homemade Shawarma!",
+    "Tips:",
+    "<ul><li>For a healthier version, grill or bake the chicken with less oil.</li><li>If you want it spicy, add harissa or chili paste to the wrap.</li><li>For a vegetarian version, use grilled mushrooms, falafel, or roasted cauliflower.</li></ul>",
+  ]
+    };
+
+    // 🔍 Keyword-based responses
+    const keywordResponses = [
+      {
+        keywords: ["recipe"],
+        answer: " Sure! Tell me what you’d like to cook — I can guide you step-by-step for the recipe."
+      },
+      {
+        keywords: ["hi","hello","holla"],
+        answer: " Hello how are you doing today, what will you like to cook today — I can guide you step-by-step."
+      },
+      {
+        keywords: ["fine","great","good"],
+        answer: "Ok so what will you like to cook today and I can guide you step-by-step."
+      },
+      {
+        keywords: ["fried rice and chicken", "fried rice and chiken", "fried", "fried rice"],
+        answer: "Here is how you can cook fried rice and chicken.",
+        recipe: "food1"
+      },
+      {
+        keywords: ["jollof rice and chicken", "jellof rice and chicken", "jolof rice and chicken", "jelof rice and chicken", "Jellof rice", "Jollof rice", "jellof rice", "jollof rice", "jellof", "jollof", "Jellof", "Jollof"],
+        answer: "Here is a way you can cook jollof rice and chicken Click Next to start.",
+        recipe: "food2"
+      },
+      {
+        keywords: ["cook rice", "cook Rice", "rice"],
+        answer: " Sure!, But can you clarify the type of rice you want to cook like jollof rice, fried rice etc."
+      },
+      {
+        keywords:["indomine", "noddles", "noodles"],
+        answer:["Cooking noodles is a very simple and easy step, but here is how to cook it;"],
+        recipe:"food3"
+      },
+      {
+        keywords:["jellof beans", "jollof beans","beans"],
+        answer:["Cooking beans is a straightforward process that doesn't takes time and also requires some patience and attention. Here's a simple recipe"],
+        recipe:"food4"
+      },
+      {
+      keywords:["porridge yam", "poridge yam","porrige yam"],
+        answer:["Porridge yam is a popular Nigerian dish! Here's a simple recipe"],
+        recipe:"food5"
+      },
+      {
+      keywords:["spaghetti", "spagetti","sphaghetti","spageti","superghetti","supaghetti", "supageti"],
+        answer:["Cooking spaghetti is a straightforward process and also an easy step. Here's a simple recipe"],
+        recipe:"food6"
+      },
+      {
+      keywords:["fruit salad", "fruit mixture","fruit combination"],
+        answer:["Making Fruit Salad is a quite straightforward process and also takes some time. Here is how you can make it"],
+        recipe:"snacks1"
+      },
+      {
+      keywords: ["meat pie"],
+        answer: "Making meat pie is a popular snack! Here's a simple recipe. Click **Next* to start.",
+        recipe: "snacks2"
+      },
+      {
+      keywords: ["pizza","piza"],
+        answer: "Making pizza is fun! Here's a simple recipe.",
+        recipe: "snacks3"
+      },
+      {
+      keywords: ["vanilla cake", "cake"],
+        answer: "Making a cake is a fun process! Here's a simple recipe..",
+        recipe: "snacks4"
+      },
+      {
+      keywords: ["burger", "burgers"],
+        answer: "Making burgers is simple and fun! Here's a recipe to get you started..",
+        recipe: "snacks5"
+      },
+      {
+      keywords: ["toast bread","toast"],
+        answer: "Making toast bread is simple and fun! Here's how you can make it.",
+        recipe: "snacks6"
+      },
+      {
+      keywords: ["ice cream","vanilla ice cream"],
+        answer: "Making ice cream is easy and fun! Here's a simple recipe to get you started. Click on Next to begin.",
+        recipe: "snacks7"
+      },
+      {
+      keywords: ["chin chin"],
+        answer: "Chin Chin is a tasty and popular West African snack! Here’s a simple recipe to make it.",
+        recipe: "snacks8"
+      },
+      {
+      keywords: ["shawarma", "shawama", "wrap",],
+        answer: "Making shawarma at home is easier than you think! Here's a simple recipe. Click Next to start.",
+        recipe: "snacks9"
+      },
+      {
+        keywords: ["bye", "thanks", "thank you"],
+        answer: "You’re welcome! Happy cooking — come back for more recipes anytime!"
+      }
+      
+    ];
+
+    // ✅ Keep track of the current recipe step
+    let currentRecipe = null;
+    let currentStepIndex = 0;
+
+    function appendMessage(text, sender, withNext = false) {
+      const msgDiv = document.createElement("div");
+      msgDiv.classList.add("chat-message", sender === "user" ? "user-message" : "bot-message");
+      msgDiv.innerHTML = text;
+      chatBody.appendChild(msgDiv);
+
+      // Add "Next" button if needed
+      if (withNext) {
+        const nextBtn = document.createElement("button");
+        nextBtn.textContent = "Next ➡️";
+        nextBtn.className = "next-btn";
+        nextBtn.onclick = showNextStep;
+        chatBody.appendChild(nextBtn);
+      }
+
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // 🧭 Handle the "Next" button click
+    function showNextStep() {
+      if (currentRecipe && currentStepIndex < recipeSteps[currentRecipe].length) {
+        appendMessage(recipeSteps[currentRecipe][currentStepIndex], "bot", currentStepIndex < recipeSteps[currentRecipe].length - 1);
+        currentStepIndex++;
+      } else {
+        appendMessage(" That’s all for this recipe. Want to cook something else? you can mention it.", "bot");
+        currentRecipe = null;
+        currentStepIndex = 0;
+      }
+    }
+
+    // 🧠 Find the appropriate response
+    function findResponse(input) {
+      const lower = input.toLowerCase();
+      for (const item of keywordResponses) {
+        if (item.keywords.some(kw => lower.includes(kw))) {
+          if (item.recipe) {
+            currentRecipe = item.recipe;
+            currentStepIndex = 0;
+            return { text: item.answer, hasNext: true };
+          }
+          return { text: item.answer, hasNext: false };
+        }
+      }
+      return { text: "I’m not sure about that one yet — but you can go to the Menu to see all the dishes I can make", hasNext: false };
+    }
+
+    function handleSend() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      appendMessage(text, "user");
+      userInput.value = "";
+
+      setTimeout(() => {
+        const reply = findResponse(text);
+        appendMessage(reply.text, "bot", reply.hasNext);
+      }, 600);
+    }
+
+    sendBtn.onclick = handleSend;
+    userInput.addEventListener("keypress", e => {
+      if (e.key === "Enter") handleSend();
+    });
+  </script>

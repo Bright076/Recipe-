@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes Menu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+        <div class="navbar">
+                <div class="nav">
+                    <li><a href="index.html">Home</a> </li>
+                    <li><a href="Menu.html">Menu</a></li>
+                    <li><a href="./recipebot2.html">RecipeAI</a></li>
+                </div>
+              </div>
+
+    <h1>ALL RECIPES</h1>
+
+    <table class="recipes-table">
+        <thead>
+            <tr>
+                <th colspan="2">Foods</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Fried Rice and Chicken</td>
+                <td><a href="./food1.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Jollof Rice and Chicken</td>
+                <td><a href="./food2.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Indomie Noodles</td>
+                <td><a href="./food3.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Beans</td>
+                <td><a href="./food4.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>White Rice and Stew</td>
+                <td><a href="./food5.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Spaghetti</td>
+                <td><a href="./food6.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Porridge Yam</td>
+                <td><a href="./food7.html">View Recipe</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="recipes-table">
+        <thead>
+            <tr>
+                <th colspan="2">Snacks and Bakeries</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Fruit Salad</td>
+                <td><a href="./snacks1.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Meat Pie</td>
+                <td><a href="./snacks2.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Pizza</td>
+                <td><a href="./snacks3.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Cake</td>
+                <td><a href="./snacks4.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Burger</td>
+                <td><a href="./snacks5.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Toast Bread</td>
+                <td><a href="./snacks6.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Ice Cream</td>
+                <td><a href="./snacks7.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Chin Chin</td>
+                <td><a href="./snacks8.html">View Recipe</a></td>
+            </tr>
+            <tr>
+                <td>Shawarma</td>
+                <td><a href="./snacks9.html">View Recipe</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    height: 30px;
+    padding-left: 3px;
+  }
+  .nav{
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+    list-style-type: none;
+    justify-items: right;
+    background-color: rgb(8, 15, 80);
+    box-shadow: 5px 2px 2px 2px black;
+    width: 11rem;
+    height: 30px;
+    justify-content: right;
+    padding: 4px;
+    align-items: right;
+    border-radius: 6px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  .nav a{
+    background: transparent;
+    text-decoration: none;
+    list-style-type: none;
+    color: white;
+  }
+  .nav li{
+    background: transparent;
+    text-decoration: none;
+    list-style-type: none;
+  }
+  .nav li a:hover{
+    border:1px solid rgb(20, 20, 189) ;
+    border-radius: 6px;
+    
+  }
+body {
+    font-family: Arial, sans-serif;
+    background-color:  rgb(8, 15, 80);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.recipes-table {
+    width: 100%;
+    margin-bottom: 30px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.recipes-table th, .recipes-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.recipes-table th {
+    background-color: red;
+    color: white;
+}
+
+.recipes-table td {
+    background-color: rgb(117, 111, 111);
+}
+
+.recipes-table a {
+    color: rgb(42, 207, 48);
+    text-decoration: none;
+}
+
+.recipes-table a:hover {
+    text-decoration: underline;
+}
+
+</style>
