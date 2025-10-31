@@ -11,6 +11,13 @@
   <title>HOW TO COOK OR MAKE DISHES.</title>
 </head>
 <body>
+    <div class="navbar">
+        <div class="nav">
+            <li><a href="index.html">Home</a> </li>
+            <li><a href="Menu.html">Menu</a></li>
+            <li><a href="./recipebot2.html">RecipeAI</a></li>
+        </div>
+      </div>
     <div class="img animate-[bounce-with-pause_3s_ease-in-out_infinite]">
         <img id="cook" src="./20250911_223302.png"  alt="logo"/>
       </div>
@@ -93,13 +100,52 @@
 </body>
 </html>
 <style>
-  body{
+  *{
     background-color: #04093E;
     color: white;
     flex-wrap: nowrap;
-    overflow-x: hidden;
 
   }
+
+  .navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    height: 30px;
+    padding-left: 3px;
+  }
+  .nav{
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+    list-style-type: none;
+    justify-items: right;
+    background-color: rgb(8, 15, 80);
+    box-shadow: 5px 2px 2px 2px black;
+    width: 11rem;
+    height: 30px;
+    justify-content: right;
+    padding: 4px;
+    align-items: right;
+    border-radius: 6px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  .nav a{
+    background: transparent;
+    text-decoration: none;
+    list-style-type: none;
+  }
+  .nav li{
+    background: transparent;
+    text-decoration: none;
+    list-style-type: none;
+  }
+  .nav li a:hover{
+    border:1px solid rgb(20, 20, 189) ;
+    border-radius: 6px;
+    
+  }
+
   @keyframes move-right{
     0%{transform: translatex(-100%);}
     100%{transform: translateX(100%)}
@@ -193,11 +239,12 @@
   .img{
     display: flex;
     justify-content: center;
+  
     position: relative;
-    z-index: 1;
-    background: transparent;
-    padding: 0;
-    height:160px;
+        z-index: 1;
+        background: transparent;
+        padding: 0;
+        height:160px;
        
   }
 
@@ -255,153 +302,85 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
 
-  #btn1:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
   }
-
   #btn2{
     background-image: url('roasted-chicken-legs-with-south-indian-long-grain-tomato-rice-cooked-with-sauteed-tomatoes-onion-red-chili-powder-cinnamon-t.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn2:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn3{
     background-image: url('instant-noodles-bowl-place-wooden-table_41722-540.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn3:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn4{
     background-image: url('black-eyed-beans-curry-indian-cuisine_114579-82633.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn4:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn5{
     background-image: url('traditional-tajine-dishes-couscous-fresh-salad-rustic-wooden-table-tagine-lamb-meat-pumpkin-top-view-flat-lay_2829-6116.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn5:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn6{
     background-image: url('pasta-spaghetti-with-shrimps-sauce_1220-5069.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn6:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn7{
     background-image: url('high-angle-sweet-potatoes-with-herbs_23-2148619092.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn7:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn8{
     background-image: url('fruit-salad-strawberry-kiwi-black-currant-yogurt_496587-43.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn8:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn9{
     background-image: url('jerky-pastries-ceramic-plate-white-surface_70216-3326.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn9:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn10{
     background-image: url('side-view-pizza-with-slices-bell-pepper-pizza-slices-flour-board-cookware_176474-3185.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn10:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn11{
     background-image: url('white-cake-poured-with-chocolate-decorated-with-oreo-tofifi-cookies_140725-9934.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn11:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn12{
     background-image: url('delicious-burger-with-fresh-ingredients_23-2150857908.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn12:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn13{
     background-image: url('pepperoni-toast-with-cheese-served-win-bamboo-plate_140725-8340.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn13:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn14{
     background-image: url('delicious-ice-cream-with-topping_23-2150735486.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
-
-  #btn14:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
   }
   
   #btn15{
@@ -410,19 +389,11 @@
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn15:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
-
   #btn16{
     background-image: url('side-view-chicken-roll-grilled-chicken-lettuce-cucumber-tomato-mayo-pita.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  #btn16:hover{
-    box-shadow: 3px 3px 15px 10px rgb(19, 36, 110);
-  }
 </style>
+
